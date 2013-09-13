@@ -19,10 +19,14 @@ import sys
 import fontforge
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print "USAGE: python generate_featurefile.py <font/sfd file> <featurefile>"
+    if len(sys.argv) < 2:
+        print "USAGE: python generate_featurefile.py <font/sfd file>"
     else:
+	sfdname = sys.argv[1]
+	featurefilename = sfdname[0:-4] + ".fea"
+	print featurefilename
+
         font = fontforge.open(sys.argv[1])
-        font.generateFeatureFile(sys.argv[2])
+        font.generateFeatureFile(featurefilename)
         font.close()
-        print "[OK] Font featurefile generated"
+        print "[SUCCESS]", featurefilename, "feature file generated"
